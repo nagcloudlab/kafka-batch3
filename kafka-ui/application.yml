@@ -1,0 +1,4 @@
+kafka:
+  clusters:
+    - name: training-kafka-cluster
+      bootstrapServers: localhost:9092
