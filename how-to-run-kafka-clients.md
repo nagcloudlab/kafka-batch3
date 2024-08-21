@@ -8,5 +8,5 @@ run java producer
 
 ```bash
 cd /path/to/kafka-clients
-mvn exec:java -Dexec.mainClass="com.example.ProducerClient"
+mvn compile exec:java -Dexec.mainClass="com.example.ProducerClient"
 ```

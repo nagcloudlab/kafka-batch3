@@ -12,8 +12,13 @@ public class CustomPartitioner implements org.apache.kafka.clients.producer.Part
 
     @Override
     public int partition(String topic, Object key, byte[] keyBytes, Object value, byte[] valueBytes, Cluster cluster) {
-        // Custom logic to determine partition
-        return 2;
+        // custom partitioning logic
+        int partition = 0;
+        // if key is not null
+        if (key != null) {
+            partition = Math.abs(key.hashCode()) % cluster.partitionCountForTopic(topic);
+        }
+        return partition;
     }
     
 }
