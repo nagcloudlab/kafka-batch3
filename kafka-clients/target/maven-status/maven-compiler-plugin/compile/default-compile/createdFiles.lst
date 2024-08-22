@@ -1,0 +1,5 @@
+com/example/ConsumerClient.class
+com/example/CustomPartitioner.class
+com/example/ProducerClient.class
+com/example/FooConsumerClient.class
+com/example/ProducerInterceptor.class
