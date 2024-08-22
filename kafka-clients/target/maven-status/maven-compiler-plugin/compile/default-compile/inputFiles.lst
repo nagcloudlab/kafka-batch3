@@ -2,4 +2,6 @@
 /Users/nag/kafka-batch3/kafka-clients/src/main/java/com/example/CustomPartitioner.java
 /Users/nag/kafka-batch3/kafka-clients/src/main/java/com/example/ProducerInterceptor.java
 /Users/nag/kafka-batch3/kafka-clients/src/main/java/com/example/FooConsumerClient.java
-/Users/nag/kafka-batch3/kafka-clients/src/main/java/com/example/ConsumerClient.java
+/Users/nag/kafka-batch3/kafka-clients/src/main/java/com/example/BarConsumerClient.java
+/Users/nag/kafka-batch3/kafka-clients/src/main/java/com/example/FooConsumerClient2.java
+/Users/nag/kafka-batch3/kafka-clients/src/main/java/com/example/FooConsumerClient3.java

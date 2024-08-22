@@ -14,13 +14,13 @@ import org.apache.kafka.clients.consumer.OffsetAndMetadata;
 import org.apache.kafka.common.TopicPartition;
 import org.apache.kafka.common.errors.WakeupException;
 
-public class FooConsumerClient {
+public class FooConsumerClient2 {
     public static void main(String[] args) throws Exception {
     
         Properties properties = new Properties();
 
         properties.put(ConsumerConfig.GROUP_ID_CONFIG, "foo");
-        properties.put(ConsumerConfig.GROUP_INSTANCE_ID_CONFIG, "foo-1");
+        properties.put(ConsumerConfig.GROUP_INSTANCE_ID_CONFIG, "foo-2");
         properties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
         properties.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG,
                 "org.apache.kafka.common.serialization.StringDeserializer");
@@ -64,7 +64,7 @@ public class FooConsumerClient {
              });
 
              // commit processed offsets
-             //consumer.commitSync(currentProcessedOffsets); // sync | async
+             // consumer.commitSync(currentProcessedOffsets); // sync | async
 
          }
     

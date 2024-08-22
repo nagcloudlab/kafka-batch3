@@ -62,7 +62,7 @@ public class ProducerClient {
 
         // 
         properties.put(ProducerConfig.CLIENT_ID_CONFIG, "producer-1");
-        properties.put(ProducerConfig.INTERCEPTOR_CLASSES_CONFIG, "com.example.ProducerInterceptor");
+        //properties.put(ProducerConfig.INTERCEPTOR_CLASSES_CONFIG, "com.example.ProducerInterceptor");
 
 
 
