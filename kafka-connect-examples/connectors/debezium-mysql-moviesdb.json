@@ -1,0 +1,21 @@
+{
+  "name": "debezium-mysql-moviesdb",
+  "config": {
+    "connector.class": "io.debezium.connector.mysql.MySqlConnector",
+    "database.hostname": "mysql",
+    "database.port": "3306",
+    "database.user": "debezium",
+    "database.password": "dbz",
+    "database.server.id": "184054",
+    "database.server.name": "mysql",
+    "database.whitelist": "moviesdb",
+    "table.whitelist": "moviesdb.movies",
+    "database.history.kafka.bootstrap.servers": "kafka:9092",
+    "database.history.kafka.recovery.attempts": "10000",
+    "database.history.kafka.topic": "debezium.dbhistory.mysql",
+    "include.schema.changes": "false",
+    "schema.history.internal.kafka.topic": "schema-history",
+    "schema.history.internal.kafka.bootstrap.servers": "kafka:9092",
+    "topic.prefix": "mysql"
+  }
+}

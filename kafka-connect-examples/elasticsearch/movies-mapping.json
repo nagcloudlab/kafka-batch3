@@ -1,0 +1,50 @@
+{
+  "settings": {
+    "analysis": {
+      "analyzer": {
+        "my_analyzer": {
+          "tokenizer": "standard",
+          "filter": ["lowercase", "edge_ngram_filter"]
+        },
+        "my_search_analyzer": {
+          "tokenizer": "standard",
+          "filter": ["lowercase"]
+        }
+      },
+      "filter": {
+        "edge_ngram_filter": {
+          "type": "edge_ngram",
+          "min_gram": 1,
+          "max_gram": 20
+        }
+      }
+    }
+  },
+  "mappings": {
+    "properties": {
+      "imdb_id": {
+        "type": "keyword"
+      },
+      "title": {
+        "type": "text",
+        "analyzer": "my_analyzer",
+        "search_analyzer": "my_search_analyzer"
+      },
+      "year": {
+        "type": "integer"
+      },
+      "actors": {
+        "type": "text"
+      },
+      "poster": {
+        "type": "text"
+      },
+      "created_at": {
+        "type": "long"
+      },
+      "updated": {
+        "type": "long"
+      }
+    }
+  }
+}
