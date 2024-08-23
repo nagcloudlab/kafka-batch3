@@ -1,3 +1,2 @@
 https://docs.google.com/presentation/d/1tIJKyzOJ-rLYSs_qRiQaSNi8iheKSUF9QHGabbJ0cZs/edit?usp=sharing
-
 https://nagcloudlab.notion.site/Kafka-Connect-b2abc9e11bbe4ddd8c5de16dc17edcc0?pvs=4
