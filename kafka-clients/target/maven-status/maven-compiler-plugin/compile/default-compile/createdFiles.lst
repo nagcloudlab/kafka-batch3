@@ -1,7 +1,8 @@
-com/example/FooConsumerClient2.class
+com/example/FooConsumer$1.class
+com/example/FooConsumer.class
 com/example/ProducerClient.class
 com/example/ProducerInterceptor.class
-com/example/FooConsumerClient3.class
+com/example/ProducerWithTransaction.class
+com/example/ConsumerAndProducer.class
 com/example/CustomPartitioner.class
-com/example/BarConsumerClient.class
-com/example/FooConsumerClient.class
+com/example/ConsumerWithIsolation.class
