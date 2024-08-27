@@ -1,0 +1,5 @@
+[2024-08-27 07:03:49,375] INFO [Broker id=102] Handling LeaderAndIsr request correlationId 10 from controller 101 for 1 partitions (state.change.logger)
+[2024-08-27 07:03:49,388] INFO [Broker id=102] Stopped fetchers as part of LeaderAndIsr request correlationId 10 from controller 101 epoch 1 as part of the become-leader transition for 1 partitions (state.change.logger)
+[2024-08-27 07:03:49,409] INFO [Broker id=102] Leader user-topic-0 with topic id Some(WlqGGpmgQ8i5h6ukgu9pTA) starts at leader epoch 0 from offset 0 with partition epoch 0, high watermark 0, ISR [102], adding replicas [] and removing replicas [] . Previous leader None and previous leader epoch was -1. (state.change.logger)
+[2024-08-27 07:03:49,443] INFO [Broker id=102] Finished LeaderAndIsr request in 67ms correlationId 10 from controller 101 for 1 partitions (state.change.logger)
+[2024-08-27 07:03:49,446] INFO [Broker id=102] Add 1 partitions and deleted 0 partitions from metadata cache in response to UpdateMetadata request sent by controller 101 epoch 1 with correlation id 11 (state.change.logger)

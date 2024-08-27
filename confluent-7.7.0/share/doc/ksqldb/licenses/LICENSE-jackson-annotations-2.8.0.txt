@@ -1,0 +1,1 @@
+../../schema-registry/licenses/LICENSE-jackson-annotations-2.5.0.txt

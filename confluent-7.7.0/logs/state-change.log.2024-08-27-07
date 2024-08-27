@@ -1,0 +1,8 @@
+[2024-08-27 09:29:18,733] INFO [Broker id=103] Handling LeaderAndIsr request correlationId 10 from controller 101 for 1 partitions (state.change.logger)
+[2024-08-27 09:29:18,734] INFO [Broker id=103] Follower _dek_registry_keys-0 starts at leader epoch 1 from offset 0 with partition epoch 1 and high watermark 0. Current leader is 102. Previous leader Some(102) and previous leader epoch was 1. (state.change.logger)
+[2024-08-27 09:29:18,735] INFO [Broker id=103] Stopped fetchers as part of become-follower request from controller 101 epoch 1 with correlation id 10 for 1 partitions (state.change.logger)
+[2024-08-27 09:29:18,744] INFO [Broker id=103] Finished LeaderAndIsr request in 11ms correlationId 10 from controller 101 for 1 partitions (state.change.logger)
+[2024-08-27 09:29:18,746] INFO [Broker id=103] Add 1 partitions and deleted 0 partitions from metadata cache in response to UpdateMetadata request sent by controller 101 epoch 1 with correlation id 11 (state.change.logger)
+[2024-08-27 09:29:18,750] INFO [Broker id=103] Handling StopReplica request correlationId 12 from controller 101 for 2 partitions (state.change.logger)
+[2024-08-27 09:29:18,773] INFO [Broker id=103] Add 2 partitions and deleted 0 partitions from metadata cache in response to UpdateMetadata request sent by controller 101 epoch 1 with correlation id 13 (state.change.logger)
+[2024-08-27 09:29:18,778] INFO [Broker id=103] Handling StopReplica request correlationId 14 from controller 101 for 2 partitions (state.change.logger)

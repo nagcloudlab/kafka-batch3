@@ -1,0 +1,1 @@
+LICENSE-osgi-resource-locator-1.0.1.txt

@@ -1,0 +1,1 @@
+../../schema-registry/licenses/LICENSE-jackson-core-2.5.4.txt

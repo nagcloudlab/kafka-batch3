@@ -1,0 +1,1 @@
+../../schema-registry/notices/NOTICE-jackson-databind-2.5.4.txt

@@ -1,0 +1,1 @@
+../../schema-registry/licenses/LICENSE-javassist-3.18.1-GA.txt

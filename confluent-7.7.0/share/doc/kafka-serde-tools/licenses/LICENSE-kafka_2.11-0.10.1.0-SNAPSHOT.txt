@@ -1,0 +1,1 @@
+../../schema-registry/licenses/LICENSE-kafka-clients-0.10.1.0-SNAPSHOT.txt
