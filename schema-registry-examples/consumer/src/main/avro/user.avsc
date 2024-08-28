@@ -5,6 +5,6 @@
   "fields": [
     {"name": "name", "type": "string"},
     {"name": "age", "type": "int"},
-    {"name": "address", "type": "string", "default": "universe"}
+    {"name": "mobile", "type": "string","default":"Nil"}
   ]
 }

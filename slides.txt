@@ -1,2 +1,13 @@
+kafka producer & consumer
 https://docs.google.com/presentation/d/1tIJKyzOJ-rLYSs_qRiQaSNi8iheKSUF9QHGabbJ0cZs/edit?usp=sharing
+
+ksql
+https://docs.google.com/presentation/d/11PdV6zAzzQCMYWshVPOK4xhMzzgUlbd_/edit?usp=sharing&ouid=116008769779639876320&rtpof=true&sd=true
+
+
+my-notes
 https://nagcloudlab.notion.site/Kafka_Archive-bea7ff19824e49cba00cf3e59e9eff15?pvs=4
+
+
+quarkus kafka messaging
+https://quarkus.io/guides/kafka-getting-started

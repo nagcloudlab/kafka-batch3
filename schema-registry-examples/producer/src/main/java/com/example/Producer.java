@@ -18,12 +18,11 @@ public class Producer {
         KafkaProducer<String, User> producer = new KafkaProducer<>(props);
 
         User user = User.newBuilder()
-                .setName("Nag")
-                .setAge(41)
-                .setAddress("Chennai")
+                .setName("Riya")
+                .setAge(10)
                 .build();
 
-        ProducerRecord<String, User> record = new ProducerRecord<>("user-topic", "user-key", user);
+        ProducerRecord<String, User> record = new ProducerRecord<>("users", "user-key", user);
 
         producer.send(record, (metadata, exception) -> {
             if (exception != null) {

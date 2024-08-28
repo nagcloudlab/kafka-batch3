@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Rest Proxy Demo</h1>
+    <button id="veg">Veg</button>
+    <button id="non-veg">Non-Veg</button>
+    <script>
+      const veg = document.getElementById("veg");
+      const nonVeg = document.getElementById("non-veg");
+
+      veg.addEventListener("click", () => {
+        console.log("veg btn clicked");
+        /*
+        curl -X POST -H "Content-Type: application/vnd.kafka.json.v2+json" \
+     --data '{"records":[{"value":{"foo":"bar"}}]}' \
+     http://localhost:8082/topics/my-topic
+        */
+        fetch("http://localhost:8082/topics/foo-events", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/vnd.kafka.json.v2+json",
+          },
+          body: JSON.stringify({
+            records: [
+              {
+                value: {
+                  type: "veg btn clicked",
+                },
+              },
+            ],
+          }),
+        })
+          .then((res) => res.json())
+          .then((data) => console.log(data))
+          .catch((err) => console.log(err));
+      });
+
+      nonVeg.addEventListener("click", () => {
+        console.log("non-veg btn clicked");
+        fetch("http://localhost:8082/topics/food-events", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/vnd.kafka.json.v2+json",
+          },
+          body: JSON.stringify({
+            records: [
+              {
+                value: {
+                  type: "non-veg btn clicked",
+                },
+              },
+            ],
+          }),
+        })
+          .then((res) => res.json())
+          .then((data) => console.log(data))
+          .catch((err) => console.log(err));
+      });
+    </script>
+  </body>
+</html>

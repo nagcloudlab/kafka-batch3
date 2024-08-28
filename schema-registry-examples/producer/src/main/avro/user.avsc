@@ -4,7 +4,6 @@
   "namespace": "com.example",
   "fields": [
     { "name": "name", "type": "string" },
-    { "name": "age", "type": "int" },
-    { "name": "address", "type": "string", "default": "universe" }
+    { "name": "age", "type": "int" }
   ]
 }
