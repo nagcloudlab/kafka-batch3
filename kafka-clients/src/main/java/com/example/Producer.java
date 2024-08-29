@@ -12,7 +12,7 @@ public class Producer {
     public static void main(String[] args) throws Exception {
 
         Properties properties = new Properties();
-        properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "4.247.148.49:9092");
+        properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9093");
         properties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,
                 "org.apache.kafka.common.serialization.StringSerializer");
         properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,
@@ -64,6 +64,16 @@ public class Producer {
         properties.put(ProducerConfig.CLIENT_ID_CONFIG, "producer-1");
         //properties.put(ProducerConfig.INTERCEPTOR_CLASSES_CONFIG, "com.example.ProducerInterceptor");
 
+        //---------------------------------------------
+        // security configuration
+        //---------------------------------------------
+
+        properties.put("security.protocol", "SSL");
+        properties.put("ssl.truststore.location", "/Users/nag/kafka-batch3/ssl/kafka.broker-1.truststore.jks");
+        properties.put("ssl.truststore.password", "changeme");
+
+        properties.put("ssl.keystore.location", "/Users/nag/kafka-batch3/ssl/kafka.client.keystore.jks");
+        properties.put("ssl.keystore.password", "changeme");
 
 
         KafkaProducer<String, String> producer = new KafkaProducer<>(properties);
@@ -83,8 +93,8 @@ public class Producer {
 
 
         // way-2: Asynchronous    
-        String topic = "topic1";
-        for (int i = 0; i < 1000000; i++) {
+        String topic = "topic2";
+        for (int i = 0; i < 1; i++) {
             // 1k sized message
             String value = "Apache Kafka is a distributed event store and stream-processing platform. It is an open-source system developed by the Apache Software Foundation written in Java and Scala. The project aims to provide a unified, high-throughput, low-latency platform for handling real-time data feed\n"
                     +

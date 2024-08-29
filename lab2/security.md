@@ -134,17 +134,14 @@ super.users=User:ANONYMOUS
 get subject/owner name from certificate
 
 ```bash
-keytool -list -v -keystore /Users/nag/kafka-redis/play-with-kafka/lab/ssl/kafka.client.keystore.jks | grep "Owner"
+keytool -list -v -keystore /Users/nag/kafka-batch3/ssl/kafka.client.keystore.jks | grep "Owner"
 ```
 
 create ACL for a topic numbers, allow principal to read & write & get metadata
 
 ```bash
-bin/kafka-acls.sh --authorizer-properties zookeeper.connect=localhost:2181 --add --allow-principal User:CN=localhost,OU=tng,O=cloudlab,L=chennai,ST=TN,C=IN --operation Read --operation Write --operation Describe --topic numbers
+bin/kafka-acls.sh --authorizer-properties zookeeper.connect=localhost:2181 --add --allow-principal User:CN=localhost,OU=tng,O=npci,L=chennai,ST=MH,C=IN --operation Read --operation Write --operation Describe --topic topic2
 
-bin/kafka-acls.sh --authorizer-properties zookeeper.connect=localhost:2181 --add --allow-principal User:CN=localhost,OU=tng,O=cloudlab,L=mumbai,ST=TN,C=IN --operation Read --operation Write --operation Describe --topic my-topic
-
-bin/kafka-acls.sh --authorizer-properties zookeeper.connect=localhost:2181 --add --allow-principal User:CN=localhost,OU=foo,O=bar,L=baz,ST=TN,C=IN --operation Read --operation Write --operation Describe --topic topic2
 ```
 
 list ACLs
@@ -156,7 +153,7 @@ bin/kafka-acls.sh --authorizer-properties zookeeper.connect=localhost:2181 --lis
 delete ACL
 
 ```bash
-bin/kafka-acls.sh --authorizer-properties zookeeper.connect=localhost:2181 --remove --allow-principal User:CN=localhost,OU=tng,O=cloudlab,L=chennai,ST=TN,C=IN --operation Read --operation Write --operation Describe --topic topic1
+bin/kafka-acls.sh --authorizer-properties zookeeper.connect=localhost:2181 --remove --allow-principal User:EMAILADDRESS=email@email.com,CN=localhost,OU=tng,O=npci,L=chennai,ST=MH,C=IN --operation Read --operation Write --operation Describe --topic topic2
 ```
 
 ---
