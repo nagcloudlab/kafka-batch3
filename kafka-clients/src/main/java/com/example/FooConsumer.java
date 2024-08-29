@@ -17,7 +17,7 @@ public class FooConsumer {
     public static void main(String[] args) throws Exception {
 
         Properties properties = new Properties();
-        properties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        properties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "4.247.148.49:9092");
         properties.put(ConsumerConfig.GROUP_ID_CONFIG, "foo");
         properties.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG,
                 "org.apache.kafka.common.serialization.StringDeserializer");

@@ -1,8 +1,8 @@
 kafka:
   clusters:
     - name: training-kafka-cluster
-      bootstrapServers: localhost:9092
-      schemaRegistry: http://localhost:8081
+      bootstrapServers: 4.247.148.49:9092
+      # schemaRegistry: http://localhost:8081
       # kafkaConnect:
       #   - name: worker1
       #     address: http://localhost:8083

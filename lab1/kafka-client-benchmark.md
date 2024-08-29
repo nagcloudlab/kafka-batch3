@@ -1,3 +1,5 @@
+https://github.com/nagcloudlab/strimzi/blob/main/week-1/play-with-kafka/005-perf-test/01.md
+
 ```bash
 bin/kafka-topics.sh \
 --create \
@@ -22,5 +24,3 @@ bin/kafka-producer-perf-test.sh \
 3000000 records sent, 54285.869388 records/sec (53.01 MB/sec), 557.32 ms avg latency, 1224.00 ms max latency, 472 ms 50th, 1027 ms 95th, 1118 ms 99th, 1176 ms 99.9th.
 
 3000000 records sent, 74729.106987 records/sec (72.98 MB/sec), 366.78 ms avg latency, 1193.00 ms max latency, 294 ms 50th, 801 ms 95th, 978 ms 99th, 1139 ms 99.9th.
-
-https://github.com/nagcloudlab/strimzi/blob/main/week-1/play-with-kafka/005-perf-test/01.md
