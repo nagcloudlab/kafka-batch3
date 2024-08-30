@@ -68,12 +68,12 @@ public class Producer {
         // security configuration
         //---------------------------------------------
 
-        properties.put("security.protocol", "SSL");
-        properties.put("ssl.truststore.location", "/Users/nag/kafka-batch3/ssl/kafka.broker-1.truststore.jks");
-        properties.put("ssl.truststore.password", "changeme");
+        // properties.put("security.protocol", "SSL");
+        // properties.put("ssl.truststore.location", "/Users/nag/kafka-batch3/ssl/kafka.broker-1.truststore.jks");
+        // properties.put("ssl.truststore.password", "changeme");
 
-        properties.put("ssl.keystore.location", "/Users/nag/kafka-batch3/ssl/kafka.client.keystore.jks");
-        properties.put("ssl.keystore.password", "changeme");
+        // properties.put("ssl.keystore.location", "/Users/nag/kafka-batch3/ssl/kafka.client.keystore.jks");
+        // properties.put("ssl.keystore.password", "changeme");
 
 
         KafkaProducer<String, String> producer = new KafkaProducer<>(properties);
@@ -93,8 +93,8 @@ public class Producer {
 
 
         // way-2: Asynchronous    
-        String topic = "topic2";
-        for (int i = 0; i < 1; i++) {
+        String topic = "foo";
+        for (int i = 0; i < 10; i++) {
             // 1k sized message
             String value = "Apache Kafka is a distributed event store and stream-processing platform. It is an open-source system developed by the Apache Software Foundation written in Java and Scala. The project aims to provide a unified, high-throughput, low-latency platform for handling real-time data feed\n"
                     +

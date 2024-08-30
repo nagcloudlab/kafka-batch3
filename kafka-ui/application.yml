@@ -1,7 +1,11 @@
 kafka:
   clusters:
-    - name: training-kafka-cluster
+    - name: cluster-A
       bootstrapServers: localhost:9092
+    - name: cluster-B
+      bootstrapServers: localhost:9093
+    - name: cluster-C
+      bootstrapServers: localhost:9094
       # schemaRegistry: http://localhost:8081
       # kafkaConnect:
       #   - name: worker1
