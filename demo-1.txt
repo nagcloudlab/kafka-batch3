@@ -1,0 +1,172 @@
+
+
+<!-- Kafka Client -->
+<dependency>
+    <groupId>org.apache.kafka</groupId>
+    <artifactId>kafka-clients</artifactId>
+    <version>3.0.0</version>
+</dependency>
+
+<!-- JSON Processing -->
+<dependency>
+    <groupId>com.fasterxml.jackson.core</groupId>
+    <artifactId>jackson-databind</artifactId>
+    <version>2.12.5</version>
+</dependency>
+
+<!-- Jedis for Redis -->
+<dependency>
+    <groupId>redis.clients</groupId>
+    <artifactId>jedis</artifactId>
+    <version>4.0.1</version>
+</dependency>
+
+
+
+---
+
+
+class UserActivity {
+    private String user_id;
+    private String activity_type;
+    private String timestamp;
+
+    public UserActivity(String user_id, String activity_type, String timestamp) {
+        this.user_id = user_id;
+        this.activity_type = activity_type;
+        this.timestamp = timestamp;
+    }
+
+    public String getUser_id() {
+        return user_id;
+    }
+
+    public String getActivity_type() {
+        return activity_type;
+    }
+
+    public String getTimestamp() {
+        return timestamp;
+    }
+}
+
+---
+
+public class RandomUserActivityProducer {
+
+    private static final String TOPIC = "user-activity";
+    private static final String BOOTSTRAP_SERVERS = "localhost:9092";
+
+    private static KafkaProducer<String, String> createKafkaProducer() {
+        Properties props = new Properties();
+        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, BOOTSTRAP_SERVERS);
+        props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+
+        return new KafkaProducer<>(props);
+    }
+
+    private static String generateRandomUserActivity() {
+        Random random = new Random();
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        String[] activityTypes = {"login", "logout", "transfer"};
+        String userId = String.valueOf(10000 + random.nextInt(90000));
+        String activityType = activityTypes[random.nextInt(activityTypes.length)];
+        String timestamp = String.valueOf(System.currentTimeMillis());
+
+        UserActivity userActivity = new UserActivity(userId, activityType, timestamp);
+
+        try {
+            return objectMapper.writeValueAsString(userActivity);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static void main(String[] args) {
+        KafkaProducer<String, String> producer = createKafkaProducer();
+
+        for (int i = 0; i < 10; i++) {
+            String activityJson = generateRandomUserActivity();
+
+            ProducerRecord<String, String> record = new ProducerRecord<>(TOPIC, activityJson);
+
+            try {
+                RecordMetadata metadata = producer.send(record).get();
+                System.out.println("Sent record(key=" + record.key() + " value=" + record.value() + 
+                                   ") meta(partition=" + metadata.partition() + ", offset=" + metadata.offset() + ")");
+            } catch (ExecutionException | InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            // Sleep for a random interval to simulate user activity
+            try {
+                Thread.sleep(1000 + new Random().nextInt(4000));
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                break;
+            }
+        }
+
+        producer.close();
+    }
+}
+
+
+---
+
+
+public class KafkaToRedisConsumer {
+
+    private static KafkaConsumer<String, String> createKafkaConsumer() {
+        Properties props = new Properties();
+        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, "activity_group");
+        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
+        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
+        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+
+        KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
+        consumer.subscribe(Collections.singletonList("user-activity"));
+        return consumer;
+    }
+
+    private static Jedis createRedisClient() {
+        return new Jedis("localhost", 6379);
+    }
+
+    public static void main(String[] args) {
+        KafkaConsumer<String, String> consumer = createKafkaConsumer();
+        Jedis redisClient = createRedisClient();
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        System.out.println("Kafka Consumer and Redis initialized. Waiting for messages...");
+
+        while (true) {
+            ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
+
+            for (ConsumerRecord<String, String> record : records) {
+                try {
+                    JsonNode userActivity = objectMapper.readTree(record.value());
+                    String userId = userActivity.get("user_id").asText();
+                    String activityType = userActivity.get("activity_type").asText();
+                    String timestamp = userActivity.get("timestamp").asText();
+
+                    String redisKey = "user:" + userId + ":activity:" + activityType;
+
+                    // Store in Redis (increment activity counter)
+                    redisClient.incr(redisKey);
+
+                    // Set expiry for the key (e.g., 1 hour)
+                    redisClient.expire(redisKey, 3600);
+
+                    System.out.println("Processed activity for user " + userId + ": " + activityType + " at " + timestamp);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+}
