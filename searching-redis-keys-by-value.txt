@@ -1,0 +1,61 @@
+
+
+1. Scan Through Keys and Filter by Value (Using Lua Script or Application Logic):
+You can scan through the keys and fetch their values to find keys matching a specific value. This is generally done using the SCAN command combined with GET in your application code or with a Lua script for performance.
+
+Example:
+lua
+Copy code
+local result = {}
+local cursor = "0"
+repeat
+    local scanResult = redis.call("SCAN", cursor, "MATCH", "your_key_pattern:*")
+    cursor = scanResult[1]
+    for _, key in ipairs(scanResult[2]) do
+        local value = redis.call("GET", key)
+        if value == "desired_value" then
+            table.insert(result, key)
+        end
+    end
+until cursor == "0"
+return result
+
+
+2. Secondary Indexes:
+You can maintain secondary indexes manually. For example, whenever you set a value for a key, you also store the key in a set where the value is the set name. This way, you can easily retrieve keys based on their values.
+Example:
+redis
+Copy code
+SET key1 "value1"
+SADD value1_keys "key1"
+
+SET key2 "value1"
+SADD value1_keys "key2"
+
+SADD value2_keys "key3"
+
+SMEMBERS value1_keys  # returns key1, key2
+
+
+3. Using RedisJSON Module:
+If your values are JSON objects, you can use the RedisJSON module which supports querying based on values inside JSON objects.
+Example:
+redis
+Copy code
+JSON.SET key1 . '{"name": "John", "age": 30}'
+JSON.SET key2 . '{"name": "Doe", "age": 25}'
+
+JSON.GET key1 .name  # returns "John"
+
+
+4. Use of Hashes:
+If your values are stored in Redis hashes, you can iterate over the fields and filter by value.
+Example:
+redis
+Copy code
+HSET myhash key1 "value1"
+HSET myhash key2 "value2"
+HSET myhash key3 "value1"
+
+HSCAN myhash 0 MATCH * COUNT 10
+Each method has its trade-offs in terms of performance and complexity, so you should choose the one that best fits your use case.
