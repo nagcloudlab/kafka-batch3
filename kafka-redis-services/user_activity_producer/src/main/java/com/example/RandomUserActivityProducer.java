@@ -70,7 +70,7 @@ public class RandomUserActivityProducer {
     public static void main(String[] args) {
         KafkaProducer<String, String> producer = createKafkaProducer();
 
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < Integer.MAX_VALUE; i++) {
             String activityJson = generateRandomUserActivity();
 
             ProducerRecord<String, String> record = new ProducerRecord<>(TOPIC, activityJson);
@@ -85,7 +85,7 @@ public class RandomUserActivityProducer {
 
             // Sleep for a random interval to simulate user activity
             try {
-                Thread.sleep(1000 + new Random().nextInt(4000));
+                Thread.sleep(100 /*+ new Random().nextInt(4000)*/);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
                 break;
