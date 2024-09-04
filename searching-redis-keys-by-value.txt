@@ -14,7 +14,7 @@ repeat
     for _, key in ipairs(scanResult[2]) do
         local value = redis.call("GET", key)
         if value == "desired_value" then
-            table.insert(result, key)
+            result.insert(result, key)
         end
     end
 until cursor == "0"

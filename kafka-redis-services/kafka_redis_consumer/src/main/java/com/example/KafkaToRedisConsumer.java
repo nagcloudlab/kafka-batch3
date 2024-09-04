@@ -48,10 +48,12 @@ public class KafkaToRedisConsumer {
                     String timestamp = userActivity.get("timestamp").asText();
                     String redisKey = "user:" + userId + ":activity:" + activityType;
                     // Store in Redis (increment activity counter)
-                    redisClient.incr(redisKey);
+                    long count=redisClient.incr(redisKey);
                     // Set expiry for the key (e.g., 1 hour)
                     redisClient.expire(redisKey, 3600);
-
+                    if(count>300){
+                        redisClient.publish("user-activity-alert", "User " + userId + " has performed " + activityType + " 300 times!");
+                    }
                     System.out.println("Processed activity for user " + userId + ": " + activityType + " at " + timestamp);
                 } catch (Exception e) {
                     e.printStackTrace();
